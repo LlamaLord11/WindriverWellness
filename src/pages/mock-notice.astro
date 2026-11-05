@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="Demonstration Notice">
+  <section class="container noticeSection">
+    <h1 id="noticeHeading">This is a demonstration site</h1>
+    <p id="noticeMessage">
+      Wind River Wellness Center is a fictional organization built as a mock project, so this action does not do anything.
+    </p>
+    <div class="noticeActions">
+      <button id="backButton" class="buttonPrimary" type="button">Go back</button>
+      <a href={`${baseUrl}/`}>Return home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const noticesByAction: Record<string, { heading: string; message: string }> = {
+    donate: {
+      heading: 'This is a mock donation page',
+      message:
+        'You cannot actually donate here. This center is a fictional organization, and no payment information was collected or processed.',
+    },
+    apply: {
+      heading: 'This is a mock application',
+      message:
+        'Your application was not submitted. This center and its job listings are fictional.',
+    },
+    intake: {
+      heading: 'This is a mock intake form',
+      message:
+        'No information was sent, and no one will contact you. If you need real support, please reach out to a real local provider or crisis service.',
+    },
+    volunteer: {
+      heading: 'This is a mock volunteer sign-up',
+      message: 'Your sign-up was not recorded. This organization is fictional.',
+    },
+    contact: {
+      heading: 'This is a mock contact form',
+      message: 'Your message was not sent. This organization is fictional.',
+    },
+    privacy: {
+      heading: 'This is a mock privacy page',
+      message: 'This demonstration site does not collect any personal information.',
+    },
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const actionName = params.get('from') ?? '';
+  const notice = noticesByAction[actionName];
+
+  const headingElement = document.getElementById('noticeHeading');
+  const messageElement = document.getElementById('noticeMessage');
+
+  if (notice && headingElement && messageElement) {
+    headingElement.textContent = notice.heading;
+    messageElement.textContent = notice.message;
+  }
+
+  document.getElementById('backButton')?.addEventListener('click', () => {
+    window.history.back();
+  });
+</script>
+
+<style>
+  .noticeSection {
+    text-align: center;
+    padding: 4rem 1.5rem;
+    max-width: 640px;
+  }
+  .noticeActions {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+</style>

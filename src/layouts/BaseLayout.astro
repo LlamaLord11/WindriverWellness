@@ -1,0 +1,33 @@
+---
+import DemoBanner from '../components/DemoBanner.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Wind River Wellness Center demonstration site' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}/favicon.svg`} />
+    <title>{title} | Wind River Wellness Center</title>
+  </head>
+  <body>
+    <DemoBanner />
+    <NavBar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

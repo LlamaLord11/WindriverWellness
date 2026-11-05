@@ -1,0 +1,29 @@
+---
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="siteFooter">
+  <div class="container footerInner">
+    <p>Wind River Wellness Center (demonstration site)</p>
+    <p>
+      <a href={`${baseUrl}/contact/`}>Contact</a> ·
+      <a href={`${baseUrl}/mock-notice/?from=privacy`}>Privacy</a>
+    </p>
+    <p class="footerSmall">© {currentYear} Fictional organization. For demonstration only.</p>
+  </div>
+</footer>
+
+<style>
+  .siteFooter {
+    background: var(--colorSurface);
+    border-top: 1px solid #e5e7eb;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    text-align: center;
+  }
+  .footerSmall {
+    color: var(--colorMuted);
+    font-size: 0.85rem;
+  }
+</style>

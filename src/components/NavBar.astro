@@ -1,0 +1,100 @@
+---
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+
+const navLinks = [
+  { label: 'Home', path: '' },
+  { label: 'About', path: '/about' },
+  { label: 'Programs', path: '/programs' },
+  { label: 'Get Help', path: '/get-help' },
+  { label: 'Get Involved', path: '/get-involved' },
+  { label: 'Careers', path: '/careers' },
+  { label: 'News', path: '/news' },
+  { label: 'Contact', path: '/contact' },
+];
+
+const navItems = navLinks.map((link) => ({
+  ...link,
+  href: `${baseUrl}${link.path}/`,
+  isActive: currentPath === `${baseUrl}${link.path}`,
+}));
+---
+
+<header class="siteHeader">
+  <a class="siteLogo" href={`${baseUrl}/`}>Harborlight Wellness Center</a>
+  <button class="menuToggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+  <nav class="siteNav">
+    {navItems.map((item) => (
+      <a href={item.href} class:list={['navTab', { active: item.isActive }]}>
+        {item.label}
+      </a>
+    ))}
+    <a class="donateButton" href={`${baseUrl}/donate/`}>Donate</a>
+  </nav>
+</header>
+
+<script>
+  const menuToggle = document.querySelector('.menuToggle');
+  const siteNav = document.querySelector('.siteNav');
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = siteNav?.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>
+
+<style>
+  .siteHeader {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .siteNav {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  .navTab {
+    text-decoration: none;
+    color: #374151;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid transparent;
+  }
+  .navTab.active {
+    border-bottom-color: #2f7d6d;
+    color: #2f7d6d;
+  }
+  .donateButton {
+    background: #2f7d6d;
+    color: #ffffff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .menuToggle {
+    display: none;
+  }
+  @media (max-width: 800px) {
+    .menuToggle {
+      display: block;
+    }
+    .siteNav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: #ffffff;
+      padding: 1rem;
+    }
+    .siteNav.open {
+      display: flex;
+    }
+  }
+</style>
