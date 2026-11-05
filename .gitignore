@@ -24,4 +24,4 @@ pnpm-debug.log*
 .idea/
 
 # Internal .md files
-Astroinfo.md
+AstroInfo.md
