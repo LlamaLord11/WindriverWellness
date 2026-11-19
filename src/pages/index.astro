@@ -1,12 +1,56 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import introHeaderImage from '../assets/images/IntroHeader1.webp';
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Home">
-  <section class="container">
-    <h1>Welcome to Wind River Wellness Center</h1>
-    <p>Placeholder home page.</p>
-    <a class="buttonPrimary" href={`${baseUrl}/mock-notice/?from=donate`}>Donate</a>
+  <section class="indexTopIntro">
+    <Image
+      src={introHeaderImage}
+      alt="Describe what the photo shows"
+      class="indexTopImage"
+      widths={[800, 1200, 1800, 2400]}
+      sizes="100vw"
+      quality="high"
+      loading="eager"
+    />
+    <div class="indexTopOverlay">
+      <h1>The Windriver Mental Health and Wellness Center</h1>
+      <a class="buttonPrimary" href={`${baseUrl}/mock-notice/?from=donate`}>Donate</a>
+    </div>
   </section>
 </BaseLayout>
+
+<style>
+  .indexTopIntro {
+    position: relative;
+  }
+  .indexTopImage {
+    display: block;
+    width: 100%;
+    height: 70vh;
+    min-height: 380px;
+    object-fit: cover;
+    object-position: center;
+  }
+  .indexTopOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .indexTopOverlay h1 {
+    margin: 0;
+    max-width: 22ch;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+</style>
