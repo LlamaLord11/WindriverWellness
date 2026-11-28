@@ -1,0 +1,135 @@
+---
+import '@fontsource-variable/fraunces';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
+}
+
+const { title, subtitle, eyebrow } = Astro.props;
+---
+
+<section class="pageHeader">
+  <div class="headerDecor" aria-hidden="true"></div>
+  <div class="container headerContent">
+    {eyebrow && <p class="headerEyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {subtitle && <p class="pageSubtitle">{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .pageHeader {
+    --waveHeight: 64px;
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 4.5rem 0 7rem;
+    text-align: center;
+    color: #ffffff;
+    background:
+      radial-gradient(ellipse 60% 120% at 85% 0%, rgba(124, 196, 180, 0.55), transparent 70%),
+      radial-gradient(ellipse 50% 100% at 8% 100%, rgba(52, 217, 163, 0.4), transparent 70%),
+      linear-gradient(135deg, #0f4c3a 0%, #2f7d6d 60%, #1b9a78 100%);
+    -webkit-mask-image:
+      linear-gradient(#000, #000),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1440,0 L1440,30 C1200,95 960,70 720,35 C480,0 240,95 0,40 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% calc(100% - var(--waveHeight) + 1px), 100% var(--waveHeight);
+    -webkit-mask-position: top, bottom;
+    -webkit-mask-repeat: no-repeat;
+    mask-image:
+      linear-gradient(#000, #000),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1440,0 L1440,30 C1200,95 960,70 720,35 C480,0 240,95 0,40 Z'/%3E%3C/svg%3E");
+    mask-size: 100% calc(100% - var(--waveHeight) + 1px), 100% var(--waveHeight);
+    mask-position: top, bottom;
+    mask-repeat: no-repeat;
+  }
+  .headerDecor {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(circle 60px at 8% 30%, rgba(255, 255, 255, 0.14) 98%, transparent 100%),
+      radial-gradient(circle 26px at 20% 78%, rgba(185, 245, 221, 0.35) 98%, transparent 100%),
+      radial-gradient(circle 44px at 92% 70%, rgba(255, 255, 255, 0.16) 98%, transparent 100%),
+      radial-gradient(circle 20px at 78% 22%, rgba(185, 245, 221, 0.4) 98%, transparent 100%),
+      radial-gradient(circle 14px at 36% 14%, rgba(255, 255, 255, 0.3) 98%, transparent 100%),
+      radial-gradient(circle 34px at 62% 84%, rgba(255, 255, 255, 0.12) 98%, transparent 100%);
+  }
+  .headerDecor::before {
+    content: '';
+    position: absolute;
+    top: -140px;
+    right: -90px;
+    width: 320px;
+    height: 320px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+  }
+  .headerDecor::after {
+    content: '';
+    position: absolute;
+    bottom: -90px;
+    left: -60px;
+    width: 220px;
+    height: 220px;
+    border: 2px solid rgba(185, 245, 221, 0.24);
+    border-radius: 50%;
+  }
+  .headerContent {
+    position: relative;
+    z-index: 1;
+  }
+  .headerEyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b9f5dd;
+  }
+  .pageHeader h1 {
+    margin: 0;
+    font-family: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.1;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+  }
+  .pageHeader h1::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 4px;
+    margin: 1.1rem auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ffffff, #7cc4b4);
+  }
+  .pageSubtitle {
+    max-width: 38rem;
+    margin: 1.1rem auto 0;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  @media (max-width: 600px) {
+    .pageHeader {
+      --waveHeight: 44px;
+      padding: 3rem 0 5.5rem;
+    }
+    .headerDecor::before {
+      top: -100px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+    }
+    .headerDecor::after {
+      bottom: -70px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+    }
+  }
+</style>

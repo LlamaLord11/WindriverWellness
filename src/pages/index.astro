@@ -21,6 +21,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
       <a class="buttonPrimary" href={`${baseUrl}/mock-notice/?from=donate`}>Donate</a>
     </div>
   </section>
+
+  <section class="missionStatment">
+    <h1>Our Mission</h1>
+    <p>To provide comprehensive mental health and wellness services to the Wind River Reservation community, promoting healing, resilience, and overall well-being.</p>
+  </section>
+
 </BaseLayout>
 
 <style>
@@ -52,5 +58,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
     margin: 0;
     max-width: 22ch;
     font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  .missionStatment {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  .missionStatment h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #2f7d6d;
   }
 </style>
